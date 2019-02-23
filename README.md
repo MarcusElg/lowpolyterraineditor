@@ -1,4 +1,4 @@
-# lowpolyterraineditor
+# Low Poly Terrain Editor
 Free Low Poly terrain editor for Unity
 
 ## Features ##
