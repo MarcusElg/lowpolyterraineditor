@@ -2,7 +2,7 @@
 Free Low Poly terrain editor for Unity
 
 ## Features ##
-- Modify brush, lower and raise terrain with configurable brush size, smoothness and strenght
+- Modify brush, lower and raise terrain with configurable brush size, smoothness and strength
 - Set height brush
 - Smooth brush
 - Paint brush, unlimited materials. Materials are per triangle
