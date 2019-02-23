@@ -43,9 +43,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99c5b590e660a84439fe47c392304760, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lowPolyTerrainMode: 5
+  lowPolyTerrainMode: 0
   brushSize: 1
-  brushStrength: 10
+  brushStrength: 1
   brushSmoothness: 1
   terrainHeight: 0
   smoothFactor: 0.5
