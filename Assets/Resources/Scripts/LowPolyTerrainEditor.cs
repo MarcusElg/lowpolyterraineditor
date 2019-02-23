@@ -138,6 +138,7 @@ public class LowPolyTerrainEditor : Editor
                 GUILayout.Label("Randomize with perlin noise");
                 serializedObject.FindProperty("perlinScale").floatValue = Mathf.Min(8f, Mathf.Max(EditorGUILayout.FloatField("Perlin Noise Scale", serializedObject.FindProperty("perlinScale").floatValue), 0));
                 serializedObject.FindProperty("perlinStrength").floatValue = EditorGUILayout.FloatField("Perlin Strength", serializedObject.FindProperty("perlinStrength").floatValue);
+                serializedObject.FindProperty("perlinPower2").boolValue = GUILayout.Toggle(serializedObject.FindProperty("perlinPower2").boolValue, "Exponential");
 
                 if (EditorGUI.EndChangeCheck())
                 {
@@ -194,6 +195,18 @@ public class LowPolyTerrainEditor : Editor
                         serializedObject.ApplyModifiedPropertiesWithoutUndo();
                         terrain.ChangeQuadSize(quadSize);
                         terrain.GenerateMesh();
+                    }
+                }
+
+                EditorGUI.BeginChangeCheck();
+                serializedObject.FindProperty("colliders").boolValue = GUILayout.Toggle(serializedObject.FindProperty("colliders").boolValue, "Generate Colliders");
+
+                if (EditorGUI.EndChangeCheck() == true)
+                {
+                    for (int j = 0; j < terrain.transform.childCount; j++)
+                    {
+                        serializedObject.ApplyModifiedProperties();
+                        terrain.transform.GetChild(j).GetComponent<MeshCollider>().enabled = serializedObject.FindProperty("colliders").boolValue;
                     }
                 }
             }

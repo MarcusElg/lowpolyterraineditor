@@ -26,6 +26,7 @@ public class LowPolyTerrain : MonoBehaviour
     // Randomize
     public float perlinScale = 1f;
     public float perlinStrength = 1f;
+    public bool perlinPower2 = false;
 
     // Options
     public int chunksWidth = 1;
@@ -38,6 +39,7 @@ public class LowPolyTerrain : MonoBehaviour
 
     public float minHeight = -5f;
     public float maxHeight = 5f;
+    public bool colliders = true;
 
     public void GenerateDefaultMesh()
     {

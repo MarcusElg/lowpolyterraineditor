@@ -98,7 +98,15 @@ public class LowPolyTerrainChunk : MonoBehaviour
         {
             float xValue = terrain.perlinScale * 0.1f * (vertices[i].x + xIndex * terrain.chunkWidth) + perlinSeed;
             float zValue = terrain.perlinScale * 0.1f * (vertices[i].z + zIndex * terrain.chunkHeight) + perlinSeed;
-            vertices[i] = new Vector3(vertices[i].x, vertices[i].y + Mathf.PerlinNoise(xValue, zValue) * terrain.perlinStrength, vertices[i].z);
+
+            if (terrain.perlinPower2 == true)
+            {
+                vertices[i] = new Vector3(vertices[i].x, vertices[i].y + Mathf.PerlinNoise(xValue, zValue) * terrain.perlinStrength * Mathf.PerlinNoise(xValue, zValue) * terrain.perlinStrength, vertices[i].z);
+            }
+            else
+            {
+                vertices[i] = new Vector3(vertices[i].x, vertices[i].y + Mathf.PerlinNoise(xValue, zValue) * terrain.perlinStrength, vertices[i].z);
+            }
         }
 
         GenerateMesh();

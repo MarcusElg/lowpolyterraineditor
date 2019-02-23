@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99c5b590e660a84439fe47c392304760, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lowPolyTerrainMode: 0
+  lowPolyTerrainMode: 5
   brushSize: 1
   brushStrength: 1
   brushSmoothness: 1
@@ -53,6 +53,7 @@ MonoBehaviour:
   materialMask: -1
   perlinScale: 1
   perlinStrength: 1
+  perlinPower2: 0
   chunksWidth: 1
   chunksHeight: 1
   chunkWidth: 10
@@ -68,3 +69,4 @@ MonoBehaviour:
   - {fileID: 2100000, guid: d3eaef0a816388e42913ef6f856f99f5, type: 2}
   minHeight: -5
   maxHeight: 5
+  colliders: 1
