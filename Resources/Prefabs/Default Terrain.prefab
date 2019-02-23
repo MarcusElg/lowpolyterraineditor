@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &791129138051214727
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 791129138051214720}
+  - component: {fileID: 791129138051214723}
+  m_Layer: 0
+  m_Name: Default Terrain
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &791129138051214720
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 791129138051214727}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &791129138051214723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 791129138051214727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99c5b590e660a84439fe47c392304760, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lowPolyTerrainMode: 5
+  brushSize: 1
+  brushStrength: 10
+  brushSmoothness: 1
+  terrainHeight: 0
+  smoothFactor: 0.5
+  materialIndex: 1
+  materialMask: -1
+  perlinScale: 1
+  perlinStrength: 1
+  chunksWidth: 1
+  chunksHeight: 1
+  chunkWidth: 10
+  chunkHeight: 10
+  quadSize: 1
+  diagonalQuadSize: 1.4142135
+  materials:
+  - {fileID: 2100000, guid: f4f8c482c1c024f4882c28aada979ffc, type: 2}
+  - {fileID: 2100000, guid: af6dc79794e093a46b23d2dde34c8400, type: 2}
+  - {fileID: 2100000, guid: f276d925bb2a58346aa52720b3edf02f, type: 2}
+  - {fileID: 2100000, guid: ed8ac29978835d940a0c81c3943ca23d, type: 2}
+  - {fileID: 2100000, guid: 147c0ea176acdd049aa87d7e9d0fe527, type: 2}
+  - {fileID: 2100000, guid: d3eaef0a816388e42913ef6f856f99f5, type: 2}
+  minHeight: -5
+  maxHeight: 5
