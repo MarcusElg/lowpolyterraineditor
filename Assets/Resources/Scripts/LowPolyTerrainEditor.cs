@@ -92,6 +92,7 @@ public class LowPolyTerrainEditor : Editor
                 EditorGUI.BeginChangeCheck();
                 serializedObject.FindProperty("brushSize").floatValue = Mathf.Clamp(EditorGUILayout.FloatField("Brush Size", serializedObject.FindProperty("brushSize").floatValue), 0, Mathf.Max(serializedObject.FindProperty("chunkWidth").intValue * serializedObject.FindProperty("chunksWidth").intValue, serializedObject.FindProperty("chunksHeight").intValue * serializedObject.FindProperty("chunkHeight").intValue) * 0.75f);
                 serializedObject.FindProperty("terrainHeight").floatValue = Mathf.Clamp(EditorGUILayout.FloatField("Height", serializedObject.FindProperty("terrainHeight").floatValue), serializedObject.FindProperty("minHeight").floatValue, serializedObject.FindProperty("maxHeight").floatValue);
+                GUILayout.Label("Pick height with shift left click");
 
                 if (EditorGUI.EndChangeCheck() == true)
                 {
@@ -203,11 +204,20 @@ public class LowPolyTerrainEditor : Editor
 
                 if (EditorGUI.EndChangeCheck() == true)
                 {
+                    serializedObject.ApplyModifiedProperties();
                     for (int j = 0; j < terrain.transform.childCount; j++)
                     {
-                        serializedObject.ApplyModifiedProperties();
                         terrain.transform.GetChild(j).GetComponent<MeshCollider>().enabled = serializedObject.FindProperty("colliders").boolValue;
                     }
+                }
+
+                EditorGUI.BeginChangeCheck();
+                serializedObject.FindProperty("flipNormals").boolValue = GUILayout.Toggle(serializedObject.FindProperty("flipNormals").boolValue, "Flip Normals");
+
+                if (EditorGUI.EndChangeCheck() == true)
+                {
+                    serializedObject.ApplyModifiedProperties();
+                    terrain.GenerateMesh();
                 }
             }
 
@@ -266,6 +276,7 @@ public class LowPolyTerrainEditor : Editor
 
                         if (leftButtonDown == true)
                         {
+                            bool changed = false;
                             Undo.RegisterFullObjectHierarchyUndo(terrain, "Modify terrain");
 
                             if (terrain.lowPolyTerrainMode == LowPolyTerrain.LowPolyTerrainMode.Paint)
@@ -299,6 +310,8 @@ public class LowPolyTerrainEditor : Editor
                                         }
                                     }
                                 }
+
+                                terrain.GenerateMesh();
                             }
                             else if (terrain.lowPolyTerrainMode == LowPolyTerrain.LowPolyTerrainMode.SmoothHeight)
                             {
@@ -362,6 +375,7 @@ public class LowPolyTerrainEditor : Editor
                                     verticeChunks[k].vertices[verticeIndexes[k] + 2] = newPosition;
                                     verticeChunks[k].vertices[verticeIndexes[k] + 3] = newPosition;
                                 }
+                                changed = true;
                             }
                             else
                             {
@@ -389,6 +403,7 @@ public class LowPolyTerrainEditor : Editor
                                                         terrainChunk.vertices[k + 1] = position;
                                                         terrainChunk.vertices[k + 2] = position;
                                                         terrainChunk.vertices[k + 3] = position;
+                                                        changed = true;
                                                     }
                                                     else
                                                     {
@@ -397,15 +412,24 @@ public class LowPolyTerrainEditor : Editor
                                                         terrainChunk.vertices[k + 1] = position;
                                                         terrainChunk.vertices[k + 2] = position;
                                                         terrainChunk.vertices[k + 3] = position;
+                                                        changed = true;
                                                     }
                                                 }
                                                 else
                                                 {
-                                                    Vector3 position = new Vector3(terrainChunk.vertices[k].x, terrain.terrainHeight, terrainChunk.vertices[k].z);
-                                                    terrainChunk.vertices[k] = position;
-                                                    terrainChunk.vertices[k + 1] = position;
-                                                    terrainChunk.vertices[k + 2] = position;
-                                                    terrainChunk.vertices[k + 3] = position;
+                                                    if (currentEvent.shift == true)
+                                                    {
+                                                        terrain.terrainHeight = raycastHit.point.y - raycastHit.transform.position.y;
+                                                    }
+                                                    else
+                                                    {
+                                                        Vector3 position = new Vector3(terrainChunk.vertices[k].x, terrain.terrainHeight, terrainChunk.vertices[k].z);
+                                                        terrainChunk.vertices[k] = position;
+                                                        terrainChunk.vertices[k + 1] = position;
+                                                        terrainChunk.vertices[k + 2] = position;
+                                                        terrainChunk.vertices[k + 3] = position;
+                                                        changed = true;
+                                                    }
                                                 }
                                             }
                                         }
@@ -413,7 +437,10 @@ public class LowPolyTerrainEditor : Editor
                                 }
                             }
 
-                            terrain.GenerateMesh();
+                            if (changed == true)
+                            {
+                                terrain.GenerateMesh();
+                            }
                         }
                     }
                 }

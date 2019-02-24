@@ -68,6 +68,11 @@ public class LowPolyTerrainChunk : MonoBehaviour
             }
         }
 
+        if (terrain.flipNormals == true)
+        {
+            triangles.Reverse();
+        }
+
         for (int i = 0; i < materialIndexes.Count; i++)
         {
             meshTriangles[materialIndexes[i]].Add(triangles[i * 3]);

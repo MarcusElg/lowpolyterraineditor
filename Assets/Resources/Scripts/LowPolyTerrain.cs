@@ -40,6 +40,7 @@ public class LowPolyTerrain : MonoBehaviour
     public float minHeight = -5f;
     public float maxHeight = 5f;
     public bool colliders = true;
+    public bool flipNormals = false;
 
     public void GenerateDefaultMesh()
     {
